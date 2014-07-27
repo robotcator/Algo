@@ -40,12 +40,29 @@ using namespace std;
 int n ,cnt;
 
 bool check(int *x, int k){
-    for(int i = 1; i < k; i ++)
-    //if(x[k] == x[i] || i+x[i] == k+x[k] || i-x[i] == k-x[k]) return false;
-    if(x[k] == x[i] || abs(i-x[i]) == abs(k-x[k])) return false;
+    for(int i = 0; i < k; i ++)
+    if(x[k] == x[i] || i+x[i] == k+x[k] || i-x[i] == k-x[k]) return false;
+    //if(x[k] == x[i] || abs(i-x[i]) == abs(k-x[k])) return false;
     return true;
 }
+
 int x[10];
+
+void queue_rec(int cur){
+    if(cur >= n){
+        cnt ++;
+        for(int i = 0; i < n; i ++)
+            cout << x[i] << " ";
+        cout << endl;
+    }
+    else {
+        for(int i = 0; i < n; i ++){
+            x[cur] = i;
+            if(check(x, cur)) queue_rec(cur + 1);
+        }
+    }
+
+}
 
 void Queue_rec(int cur){
     if(cur >= n) {
@@ -95,22 +112,11 @@ void Queue(int n){
 }
 
 int main(){
-    int p ;
-    int s[100];
-    scanf("%d", &p);
-    for(int i = 0; i < p; i ++)
-        scanf("%d", &s[i]);
-    sort(s, s+p);
-    while(next_permutation(s, s+p)){
-        for(int i = 0; i < p; i ++){
-            printf("%d ", s[i]);
-        }
-        printf("\n");
-    }
     n = 8;
     memset(x, -1, sizeof(x));
+    queue_rec(0);
     //Queue_rec(0);
-    Queue(n);
+    //Queue(n);
     cout << cnt << endl;
     return 0;
 }

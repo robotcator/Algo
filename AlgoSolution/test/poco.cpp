@@ -1,3 +1,27 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+void fun(char *str){
+    int len = strlen(str);
+    int i ;
+    char temp;
+    for(i = 0; i < len/2; i ++){
+        temp = str[i];
+        str[i] = str[len-1-i];
+        str[len-1-i]= temp;
+    }
+}
+
+int main(){
+    char str[100];
+    scanf("%s", str);
+    fun(str);
+    printf("%s\n", str);
+}
+
+
+/*
 #include <cstdio>
 #include <iostream>
 #include <cstring>
@@ -38,7 +62,7 @@ int main(){
     }
     return 0;
 }
-
+*/
 /*
 #include <cstdio>
 #include <iostream>
